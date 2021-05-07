@@ -12,21 +12,6 @@ class ValidateArgs(unittest.TestCase):
 
 class ValidateGrid(unittest.TestCase):
 
-    def test_invalid_grid_fail_no_x(self):
-        size = "5d5"
-        with self.assertRaises(SystemExit):
-            valid_grid(size)
-
-    def test_invalid_grid_fail_too_short(self):
-        size = "5"
-        with self.assertRaises(SystemExit):
-            valid_grid(size)
-
-    def test_invalid_grid_fail_negative(self):
-        size = "5x-5"
-        with self.assertRaises(SystemExit):
-            valid_grid(size)
-
     def test_invalid_grid_fail_letters(self):
         size = "fxf"
         with self.assertRaises(SystemExit):
@@ -64,55 +49,7 @@ class ValidateLocation(unittest.TestCase):
         with self.assertRaises(SystemExit):
             valid_locations(size, locations)
 
-    def test_invalid_location_empty_2(self):
-        size = "5x5"
-        locations = "(5,)"
-        with self.assertRaises(SystemExit):
-            valid_locations(size, locations)
-
-    def test_invalid_location_empty_3(self):
-        size = "5x5"
-        locations = "(5,4) (5,)"
-        with self.assertRaises(SystemExit):
-            valid_locations(size, locations)
-
-    def test_invalid_location_letter(self):
-        size = "5x5"
-        locations = "(5,f)"
-        with self.assertRaises(SystemExit):
-            valid_locations(size, locations)
-
-    def test_invalid_location_letter_2(self):
-        size = "5x5"
-        locations = "(f)"
-        with self.assertRaises(SystemExit):
-            valid_locations(size, locations)
-
-    def test_invalid_coords_1(self):
-        size = "5x5"
-        locations = "(5)"
-        with self.assertRaises(SystemExit):
-            valid_locations(size, locations)
-
-    def test_invalid_coords_2(self):
-        size = "5x5"
-        locations = "(5,4) (5)"
-        with self.assertRaises(SystemExit):
-            valid_locations(size, locations)
-
-    def test_invalid_coords_3(self):
-        size = "5x5"
-        locations = "(-2,4)"
-        with self.assertRaises(SystemExit):
-            valid_locations(size, locations)
-
-    def test_out_of_delivery_area_1(self):
-        size = "5x5"
-        locations = "(6,4)"
-        with self.assertRaises(SystemExit):
-            valid_locations(size, locations)
-
-    def test_out_of_delivery_area_2(self):
+    def test_out_of_delivery_area(self):
         size = "5x5"
         locations = "(1,7)"
         with self.assertRaises(SystemExit):
@@ -136,14 +73,6 @@ class TestDelivery(unittest.TestCase):
     def test_delivery_success_4(self):
         locations = ['(1,3)', '(1,3)']
         self.assertEqual(delivery(locations), "ENNNDD")
-
-    def test_delivery_fail(self):
-        locations = ['(5,5)']
-        self.assertNotEqual(delivery(locations), "EEEENNNN")
-
-    def test_delivery_fail_2(self):
-        locations = ['(5,5)']
-        self.assertNotEqual(delivery(locations), "")
 
 
 if __name__ == '__main__':
